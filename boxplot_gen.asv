@@ -36,11 +36,7 @@ RawMatrix=zeros(height(PGPlazaalldata),5);
 formatIn = 'mm/dd/yyyy';
 for i = 1:8760
     allDate = datenum(PGPlazaalldata.Date(i),formatIn);
-    RawMatrix(i,1)=day(allDate);
-    RawMatrix(i,2)=month(allDate);
-    RawMatrix(i,3)=year(allDate);
-    RawMatrix(i,4)=PGPlazaalldata.Time(i);
-    RawMatrix(i,5)=PGPlazaalldata.PM25(i);
+    
 end
 
 
