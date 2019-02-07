@@ -100,5 +100,41 @@ for n = 1:length(RawMatrix)
 end
 
 %% Split by hour
+winterhrs = [];
+springhrs =[];
+summerhrs=[];
+fallhrs=[];
+
+index = 1;
+for n = 1:length(winter)-24
+    if isnan(winter(n,4))
+        winterhrs(index,1) = winter(n,5);
+        winterhrs(index,2) = winter(n+1,5);
+        winterhrs(index,3) = winter(n+2,5);
+        winterhrs(index,4) = winter(n+3,5);
+        winterhrs(index,5) = winter(n+4,5);
+        winterhrs(index,6) = winter(n+5,5);
+        winterhrs(index,7) = winter(n+6,5);
+        winterhrs(index,8) = winter(n+7,5);
+        winterhrs(index,9) = winter(n+8,5);
+        winterhrs(index,10) = winter(n+9,5);
+        winterhrs(index,11) = winter(n+10,5);
+        winterhrs(index,12) = winter(n+11,5);
+        winterhrs(index,13) = winter(n+12,5);
+        winterhrs(index,14) = winter(n+13,5);
+        winterhrs(index,15) = winter(n+14,5);
+        winterhrs(index,16) = winter(n+15,5);
+        winterhrs(index,17) = winter(n+16,5);
+        winterhrs(index,18) = winter(n+17,5);
+        winterhrs(index,19) = winter(n+18,5);
+        winterhrs(index,20) = winter(n+19,5);
+        winterhrs(index,21) = winter(n+20,5);
+        winterhrs(index,22) = winter(n+21,5);
+        winterhrs(index,23) = winter(n+22,5);
+        winterhrs(index,24) = winter(n+23,5);
+        index = index + 1;
+    end
+end
+
 
 %% Boxplots

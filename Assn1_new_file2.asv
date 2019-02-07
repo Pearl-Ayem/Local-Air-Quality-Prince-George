@@ -67,31 +67,73 @@ fall=[];
 for n = 1:length(RawMatrix)
     iswinter = RawMatrix(n,2) == 1 || RawMatrix(n,2) == 2 || RawMatrix(n,2) == 3;
     isspring = RawMatrix(n,2) == 4 || RawMatrix(n,2) == 5 || RawMatrix(n,2) == 6;
-    issummer = RawMatrix(n,2) == 7 || RawMatrix(n,2) == 8 || RawMatrix(n,2) == 9;
-    isfall = RawMatrix(n,2) == 10 || RawMatrix(n,2) == 11 || RawMatrix(n,2) == 12;
     if iswinter
         winter(n,:)=RawMatrix(n,:);
-    elseif isspring
-        spring(n,:)=RawMatrix(n,:);
-    elseif issummer
-        summer(n,:)=RawMatrix(n,:);
-    elseif isfall
-        fall(n,:)=RawMatrix(n,:);
+    end
+ end
+
+index = 1;
+for n = 1:length(RawMatrix)
+    isspring = RawMatrix(n,2) == 4 || RawMatrix(n,2) == 5 || RawMatrix(n,2) == 6;
+    if isspring
+        spring(index,:)=RawMatrix(n,:);
+        index = index + 1;
     end
 end
 
 index = 1;
 for n = 1:length(RawMatrix)
-    isspring = RawMatrix(n,2) == 4 || RawMatrix(n,2) == 5 || RawMatrix(n,2) == 6;
     issummer = RawMatrix(n,2) == 7 || RawMatrix(n,2) == 8 || RawMatrix(n,2) == 9;
-    isfall = RawMatrix(n,2) == 10 || RawMatrix(n,2) == 11 || RawMatrix(n,2) == 12;
-    if iswinter
-        winter(n,:)=RawMatrix(n,:);
-    elseif isspring
-        spring(n,:)=RawMatrix(n,:);
-    elseif issummer
-        summer(n,:)=RawMatrix(n,:);
-    elseif isfall
-        fall(n,:)=RawMatrix(n,:);
+    if issummer
+        summer(index,:)=RawMatrix(n,:);
+        index = index + 1;
     end
 end
+
+index = 1;
+for n = 1:length(RawMatrix)
+    isfall = RawMatrix(n,2) == 10 || RawMatrix(n,2) == 11 || RawMatrix(n,2) == 12;
+    if isfall
+        fall(index,:)=RawMatrix(n,:);
+        index = index + 1;
+    end
+end
+
+%% Split by hour
+winterhrs = [];
+springhrs =[];
+summerhrs=[];
+fallhrs=[];
+
+for n = 1:length(winter) - 24:24
+    if isnan(winter(n,4))
+        winterhrs(index,1) = winter(n,5);
+        winterhrs(index,2) = winter(n+1,5);
+        winterhrs(index,2) = winter(n+2,5);
+        winterhrs(index,2) = winter(n+3,5);
+        winterhrs(index,2) = winter(n+4,5);
+        winterhrs(index,2) = winter(n+5,5);
+        winterhrs(index,2) = winter(n+6,5);
+        winterhrs(index,2) = winter(n+7,5);
+        winterhrs(index,2) = winter(n+8,5);
+        winterhrs(index,2) = winter(n+9,5);
+        winterhrs(index,2) = winter(n+10,5);
+        winterhrs(index,2) = winter(n+11,5);
+        winterhrs(index,2) = winter(n+12,5);
+        winterhrs(index,2) = winter(n+13,5);
+        winterhrs(index,2) = winter(n+14,5);
+        winterhrs(index,2) = winter(n+15,5);
+        winterhrs(index,2) = winter(n+16,5);
+        winterhrs(index,2) = winter(n+17,5);
+        winterhrs(index,2) = winter(n+18,5);
+        winterhrs(index,2) = winter(n+19,5);
+        winterhrs(index,2) = winter(n+20,5);
+        winterhrs(index,2) = winter(n+21,5);
+        winterhrs(index,2) = winter(n+22,5);
+        winterhrs(index,2) = winter(n+23,5);
+        winterhrs(index,2) = winter(n+24,5);
+    end
+end
+
+
+%% Boxplots
