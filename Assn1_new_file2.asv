@@ -47,7 +47,7 @@ RawMatrix=[];
 index= 1;
 for n = 1:9528
     allDate = datenum(pgdata2.Date(n),formatIn);
-    isvalid = (year(allDate) == 2018 || year(allDate) ==2019);
+    isvalid = year(allDate) == 2018;
     if isvalid
         RawMatrix(index,1)=day(allDate);
         RawMatrix(index,2)=month(allDate);
@@ -58,5 +58,40 @@ for n = 1:9528
     end
 end
 
-figure
-plot(RawMatrix(
+%% split by season
+winter = [];
+spring =[];
+summer=[];
+fall=[];
+
+for n = 1:length(RawMatrix)
+    iswinter = RawMatrix(n,2) == 1 || RawMatrix(n,2) == 2 || RawMatrix(n,2) == 3;
+    isspring = RawMatrix(n,2) == 4 || RawMatrix(n,2) == 5 || RawMatrix(n,2) == 6;
+    issummer = RawMatrix(n,2) == 7 || RawMatrix(n,2) == 8 || RawMatrix(n,2) == 9;
+    isfall = RawMatrix(n,2) == 10 || RawMatrix(n,2) == 11 || RawMatrix(n,2) == 12;
+    if iswinter
+        winter(n,:)=RawMatrix(n,:);
+    elseif isspring
+        spring(n,:)=RawMatrix(n,:);
+    elseif issummer
+        summer(n,:)=RawMatrix(n,:);
+    elseif isfall
+        fall(n,:)=RawMatrix(n,:);
+    end
+end
+
+index = 1;
+for n = 1:length(RawMatrix)
+    isspring = RawMatrix(n,2) == 4 || RawMatrix(n,2) == 5 || RawMatrix(n,2) == 6;
+    issummer = RawMatrix(n,2) == 7 || RawMatrix(n,2) == 8 || RawMatrix(n,2) == 9;
+    isfall = RawMatrix(n,2) == 10 || RawMatrix(n,2) == 11 || RawMatrix(n,2) == 12;
+    if iswinter
+        winter(n,:)=RawMatrix(n,:);
+    elseif isspring
+        spring(n,:)=RawMatrix(n,:);
+    elseif issummer
+        summer(n,:)=RawMatrix(n,:);
+    elseif isfall
+        fall(n,:)=RawMatrix(n,:);
+    end
+end

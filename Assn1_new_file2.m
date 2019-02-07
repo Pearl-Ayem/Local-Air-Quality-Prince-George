@@ -59,3 +59,46 @@ for n = 1:9528
 end
 
 %% split by season
+winter = [];
+spring =[];
+summer=[];
+fall=[];
+
+for n = 1:length(RawMatrix)
+    iswinter = RawMatrix(n,2) == 1 || RawMatrix(n,2) == 2 || RawMatrix(n,2) == 3;
+    isspring = RawMatrix(n,2) == 4 || RawMatrix(n,2) == 5 || RawMatrix(n,2) == 6;
+    if iswinter
+        winter(n,:)=RawMatrix(n,:);
+    end
+ end
+
+index = 1;
+for n = 1:length(RawMatrix)
+    isspring = RawMatrix(n,2) == 4 || RawMatrix(n,2) == 5 || RawMatrix(n,2) == 6;
+    if isspring
+        spring(index,:)=RawMatrix(n,:);
+        index = index + 1;
+    end
+end
+
+index = 1;
+for n = 1:length(RawMatrix)
+    issummer = RawMatrix(n,2) == 7 || RawMatrix(n,2) == 8 || RawMatrix(n,2) == 9;
+    if issummer
+        summer(index,:)=RawMatrix(n,:);
+        index = index + 1;
+    end
+end
+
+index = 1;
+for n = 1:length(RawMatrix)
+    isfall = RawMatrix(n,2) == 10 || RawMatrix(n,2) == 11 || RawMatrix(n,2) == 12;
+    if isfall
+        fall(index,:)=RawMatrix(n,:);
+        index = index + 1;
+    end
+end
+
+%% Split by hour
+
+%% Boxplots
