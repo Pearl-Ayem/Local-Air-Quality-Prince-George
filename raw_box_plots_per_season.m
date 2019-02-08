@@ -241,23 +241,76 @@ figure
 boxplot(winterhrs,hoursvec);
 title('Winter (Jan,Feb,Mar) PM 2.5 concentrations per hour');
 xlabel('Hours');
-ylabel('PM 2.5 Concentration (ppb)');
+ylabel('PM 2.5 Concentration ({\mu}g m^{-3})');
+grid on
+grid minor
 
 figure
 boxplot(springhrs,hoursvec);
 title('Spring (Apr,May,Jun) PM 2.5 concentrations per hour');
 xlabel('Hours');
-ylabel('PM 2.5 Concentration (ppb)');
+ylabel('PM 2.5 Concentration ({\mu}g m^{-3})');
+grid on
+grid minor
 
 figure
 boxplot(summerhrs,hoursvec);
 title('Summer (Jul,Aug,Sep) PM 2.5 concentrations per hour');
 xlabel('Hours');
-ylabel('PM 2.5 Concentration (ppb)');
+ylabel('PM 2.5 Concentration ({\mu}g m^{-3})');
+grid on
+grid minor
 
 figure
 boxplot(fallhrs,hoursvec);
 title('Fall (Oct,Nov,Dec) PM 2.5 concentrations per hour');
 xlabel('Hours');
-ylabel('PM 2.5 Concentration (ppb)');
+ylabel('PM 2.5 Concentration ({\mu}g m^{-3})');
+grid on
+grid minor
+
+
+alldatetime =strings();
+i =1;
+for n = 1:9528-24
+    allDate = datenum(pgdata2.Date(n),formatIn);
+    isvalid = year(allDate) == 2018;
+    if isnan(pgdata2.Time(n)) && isvalid
+    alldatetime(i,1) = pgdata2.Date(n) + (" 00:00");
+    alldatetime(i + 1,1) = pgdata2.Date(n+1) + (" 01:00");
+    alldatetime(i + 2,1) = pgdata2.Date(n+2) + (" 02:00");
+    alldatetime(i + 3,1) = pgdata2.Date(n+3) + (" 03:00");
+    alldatetime(i + 4,1) = pgdata2.Date(n+4) + (" 04:00");
+    alldatetime(i + 5,1) = pgdata2.Date(n+5) + (" 05:00");
+    alldatetime(i + 6,1) = pgdata2.Date(n+6) + (" 06:00");
+    alldatetime(i + 7,1) = pgdata2.Date(n+7) + (" 07:00");
+    alldatetime(i + 8,1) = pgdata2.Date(n+8) + (" 08:00");
+    alldatetime(i + 9,1) = pgdata2.Date(n+9) + (" 09:00");
+    alldatetime(i + 10,1) = pgdata2.Date(n+10) + (" 10:00");
+    alldatetime(i + 11,1) = pgdata2.Date(n+11) + (" 11:00");
+    alldatetime(i + 12,1) = pgdata2.Date(n+12) + (" 12:00");
+    alldatetime(i+ 13,1) = pgdata2.Date(n+13) + (" 13:00");
+    alldatetime(i + 14,1) = pgdata2.Date(n+14) + (" 14:00");
+    alldatetime(i + 15,1) = pgdata2.Date(n+15) + (" 15:00");
+    alldatetime(i + 16,1) = pgdata2.Date(n+16) + (" 16:00");
+    alldatetime(i + 17,1) = pgdata2.Date(n+17) + (" 17:00");
+    alldatetime(i + 18,1) = pgdata2.Date(n+18) + (" 18:00");
+    alldatetime(i + 19,1) = pgdata2.Date(n+19) + (" 19:00");
+    alldatetime(i + 20,1) = pgdata2.Date(n+20) + (" 20:00");
+    alldatetime(i + 21,1) = pgdata2.Date(n+21) + (" 21:00");
+    alldatetime(i + 22,1) = pgdata2.Date(n+22) + (" 22:00");
+    alldatetime(i + 23,1) = pgdata2.Date(n+23) + (" 23:00");
+    i = i + 24;
+    end
+end
+
+figure
+formatIn = 'MM/dd/yyyy hh:mm';
+plot(datetime(alldatetime,'InputFormat',formatIn),RawMatrix(:,5));
+title('Hourly Timeseries of PM 2.5 concentrations in 2018');
+xlabel('Date');
+ylabel('PM 2.5 Concentration ({\mu}g m^{-3})');
+datetick('x','mmm');
+grid on
+grid minor
 
