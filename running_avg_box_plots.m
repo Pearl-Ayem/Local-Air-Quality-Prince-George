@@ -322,10 +322,30 @@ grid minor
 
 figure
 formatIn = 'MM/dd/yyyy hh:mm';
-plot(datetime(alldatetime,'InputFormat',formatIn),RawMatrix(:,5));
+x_axis_dates=datetime(alldatetime,'InputFormat',formatIn);
+plot(x_axis_dates,RawMatrix(:,5));
 title({'24 Hour Running Avg Timeseries of',' PM 2.5 concentrations in 2018'});
 xlabel('Date');
 ylabel('PM 2.5 Concentration ({\mu}g m^{-3})');
 datetick('x','mmm');
 grid on
 grid minor
+
+% HISTOGRAM EXCEEDANCES
+pmdata= RawMatrix(:,5);
+m1 = pmdata <= 28;
+m2 = pmdata > 28;
+numbins = 40;
+%histogram(x_axis_dates(m2));
+xlabel({'Months'}); 
+ylabel('Count per bin')
+title('Frequency of PM2.5 exceedances in 2018');
+legend('> CWS (28 {\mu}g m^{-3})');
+h = histogram(x_axis_dates(m2)) ;
+x = h.BinEdges - 1 ;
+y = h.Values ;
+h.NumBins =12;
+h.BinEdges = (x_axis_dates(1): x_axis_dates(end-36));
+h;
+text(x(1:end-1),y,num2str(y')); 
+box off
