@@ -335,17 +335,19 @@ grid minor
 pmdata= RawMatrix(:,5);
 m1 = pmdata <= 28;
 m2 = pmdata > 28;
-edges = datetime([x_axis_dates(1),x_axis_dates(720),x_axis_dates(2*720),...
-    x_axis_dates(3*720),x_axis_dates(4*720),x_axis_dates(5*720),x_axis_dates(6*720),...
-    x_axis_dates(7*720),x_axis_dates(8*720),x_axis_dates(9*720),x_axis_dates(10*720),...
-    x_axis_dates(11*720),x_axis_dates(end-25)]);
-h = histogram(x_axis_dates(m2),12,'BinEdges',edges);
+edges = datetime([x_axis_dates(1),x_axis_dates(722),x_axis_dates(1394),...
+    x_axis_dates(3*720 -22),x_axis_dates(4*720 - 22),x_axis_dates(5*720 + 2),x_axis_dates(6*720 + 2),...
+    x_axis_dates(7*720  + 26),x_axis_dates(8*720  + 50),x_axis_dates(9*720  + 50),x_axis_dates(10*720  + 74),...
+    x_axis_dates(11*720  + 74),x_axis_dates(end-22)]);
+h = histogram(x_axis_dates(m2),'NumBins',12,'BinEdges',edges);
 h;
 xlabel({'Months'}); 
 ylabel('Count per bin')
 title('Frequency of PM2.5 exceedances in 2018');
 legend('> CWS (28 {\mu}g m^{-3})');
-x = h.BinEdges - 1 ;
+xticks(edges + 15);
+xtickformat('MMM')
+x = h.BinEdges + 15 ;
 y = h.Values ;
-text(x(1:end-1),y,num2str(y')); 
+text(x(1:end-1),y,num2str(y'),'HorizontalAlignment','center', 'VerticalAlignment','bottom'); 
 box off
