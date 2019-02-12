@@ -322,7 +322,7 @@ grid minor
 
 figure
 formatIn = 'MM/dd/yyyy hh:mm';
-x_axis_dates=datetime(alldatetime,'InputFormat',formatIn);
+x_axis_dates=datetime(alldatetime);
 plot(x_axis_dates,RawMatrix(:,5));
 title({'24 Hour Running Avg Timeseries of',' PM 2.5 concentrations in 2018'});
 xlabel('Date');
@@ -335,17 +335,17 @@ grid minor
 pmdata= RawMatrix(:,5);
 m1 = pmdata <= 28;
 m2 = pmdata > 28;
-numbins = 40;
-%histogram(x_axis_dates(m2));
+edges = datetime([x_axis_dates(1),x_axis_dates(720),x_axis_dates(2*720),...
+    x_axis_dates(3*720),x_axis_dates(4*720),x_axis_dates(5*720),x_axis_dates(6*720),...
+    x_axis_dates(7*720),x_axis_dates(8*720),x_axis_dates(9*720),x_axis_dates(10*720),...
+    x_axis_dates(11*720),x_axis_dates(end-25)]);
+h = histogram(x_axis_dates(m2),12,'BinEdges',edges);
+h;
 xlabel({'Months'}); 
 ylabel('Count per bin')
 title('Frequency of PM2.5 exceedances in 2018');
 legend('> CWS (28 {\mu}g m^{-3})');
-h = histogram(x_axis_dates(m2)) ;
 x = h.BinEdges - 1 ;
 y = h.Values ;
-h.NumBins =12;
-h.BinEdges = (x_axis_dates(1): x_axis_dates(end-36));
-h;
 text(x(1:end-1),y,num2str(y')); 
 box off
