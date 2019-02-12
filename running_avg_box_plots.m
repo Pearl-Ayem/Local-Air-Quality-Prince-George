@@ -321,7 +321,6 @@ grid minor
 
 
 figure
-formatIn = 'MM/dd/yyyy hh:mm';
 x_axis_dates=datetime(alldatetime);
 plot(x_axis_dates,RawMatrix(:,5));
 title({'24 Hour Running Avg Timeseries of',' PM 2.5 concentrations in 2018'});
@@ -331,6 +330,7 @@ datetick('x','mmm');
 grid on
 grid minor
 
+figure
 % HISTOGRAM EXCEEDANCES
 pmdata= RawMatrix(:,5);
 m1 = pmdata <= 28;
@@ -344,7 +344,7 @@ h;
 xlabel({'Months'}); 
 ylabel('Count per bin')
 title('Frequency of PM2.5 exceedances in 2018');
-legend('> CWS (28 {\mu}g m^{-3})');
+legend('> CWS (28 {\mu}g m^{-3})','Location','northwest');
 xticks(edges + 15);
 xtickformat('MMM')
 x = h.BinEdges + 15 ;

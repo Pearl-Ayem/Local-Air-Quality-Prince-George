@@ -306,8 +306,8 @@ grid minor
 
 
 figure
-formatIn = 'MM/dd/yyyy hh:mm';
-plot(datetime(alldatetime,'InputFormat',formatIn),RawMatrix(:,5));
+x_axis_dates=datetime(alldatetime);
+plot(x_axis_dates,RawMatrix(:,5));
 title('Hourly Timeseries of PM 2.5 concentrations in 2018');
 xlabel('Date');
 ylabel('PM 2.5 Concentration ({\mu}g m^{-3})');
